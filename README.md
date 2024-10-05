@@ -8,6 +8,7 @@ This is a boilerplate for an ExpressJS server with a few basic features.
 - 📦 Environment variables
 - 📝 Body parsing
 - 🚀 Structured responses
+- 🛑 Error handling
 - 🐳 Docker managed
 
 ## Getting started
