@@ -1,0 +1,11 @@
+services:
+    web:
+        build:
+            context: .
+            target: development
+        ports:
+            - "3000:3000"
+        volumes:
+            - .:/data/app
+        stdin_open: true
+        tty: true
