@@ -1,6 +1,6 @@
 import t from "i18n/translate";
 import Logger from "log/logger";
-import type { Request, Response } from "express";
+import type { NextFunction, Request } from "express";
 
 export interface StatusPayload {
     status: number;
@@ -9,13 +9,18 @@ export interface StatusPayload {
 }
 
 export interface GeneratedStatusPayload extends StatusPayload {
-    timestamp: number;
     success: boolean;
     translatedError?: string;
 }
 
+export interface Payload {
+    masterStatus: number;
+    sentAt: number;
+    response: GeneratedStatusPayload[];
+}
+
 export default class Status {
-    public static send(req: Request, res: Response, status: StatusPayload | StatusPayload[]) {
+    public static send(req: Request, next: NextFunction, status: StatusPayload | StatusPayload[]) {
         const statusList = Array.isArray(status) ? status : [status];
         const lang = req.lang;
 
@@ -23,7 +28,7 @@ export default class Status {
         const hasSameStatus = response.every((r) => r.status === response[0].status);
         const masterStatus = hasSameStatus ? response[0].status : 207;
 
-        res.status(masterStatus === 204 ? 200 : masterStatus).json({
+        next({
             masterStatus,
             sentAt: Date.now(),
             response,
@@ -35,13 +40,12 @@ export default class Status {
             Logger.warn("status.ts::generatePayload | Returning success status with error", payload);
         }
 
-        if (!payload.error && payload.status >= 400) {
+        if (!payload.error && payload.status >= 500) {
             Logger.warn("status.ts::generatePayload | Returning error status without error", payload);
         }
 
         return {
             ...payload,
-            timestamp: Date.now(),
             success: !payload.error,
             translatedError: payload.error ? t(lang, payload.error) : undefined,
         };

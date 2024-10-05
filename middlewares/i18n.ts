@@ -5,7 +5,7 @@ import Logger from "../log/logger";
 export default function middlewareI18n(req: Request, res: Response, next: NextFunction) {
     const clientLocales = [
         req.cookies["lang"], // First, check if the user has a cookie set
-        req.acceptsLanguages(), // Then, check the Accept-Language langs
+        ...req.acceptsLanguages(), // Then, check the Accept-Language langs
     ];
 
     const language = clientLocales
@@ -23,4 +23,6 @@ export default function middlewareI18n(req: Request, res: Response, next: NextFu
     // Set the language for the request
     req.lang = language || "en";
     res.header("Content-Language", language || "en");
+
+    next();
 }

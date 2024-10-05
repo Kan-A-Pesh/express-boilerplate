@@ -13,7 +13,7 @@ RUN npm install --include=dev
 USER node
 WORKDIR /data/app
 
-CMD ["npm", "run", "dev"]
+CMD ["npx", "ts-node-dev", "-r", "tsconfig-paths/register", "app.ts"]
 
 # Production stage
 # Build the app
@@ -24,7 +24,7 @@ RUN npm install
 COPY . /data/app
 WORKDIR /data/app
 
-RUN npm run build
+RUN npx tsc
 
 # Create the server image
 FROM node:20-alpine AS production

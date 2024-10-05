@@ -41,6 +41,7 @@ export default class Logger {
     }
 
     public static writeRaw(data: string) {
+        console.log(data);
         appendFile(Logger.logfile, data + "\n", () => {});
     }
 }

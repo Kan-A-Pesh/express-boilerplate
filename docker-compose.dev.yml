@@ -4,7 +4,7 @@ services:
             context: .
             target: development
         ports:
-            - "3000:3000"
+            - "0.0.0.0:3000:3000"
         volumes:
             - .:/data/app
         stdin_open: true

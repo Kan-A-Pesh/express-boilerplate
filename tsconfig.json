@@ -4,6 +4,9 @@
         "module": "commonjs",
         "rootDir": "./",
         "baseUrl": "./",
+        "paths": {
+            "@/*": ["./*"]
+        },
         "typeRoots": ["./types"],
         "resolveJsonModule": true,
         "outDir": "./dist",
