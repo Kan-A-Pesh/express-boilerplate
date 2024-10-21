@@ -5,7 +5,7 @@ import type { NextFunction, Request } from "express";
 export interface StatusPayload {
     status: number;
     error?: string;
-    data?: any;
+    data?: unknown;
 }
 
 export interface GeneratedStatusPayload extends StatusPayload {
@@ -31,7 +31,7 @@ export default class Status {
         next({
             masterStatus,
             sentAt: Date.now(),
-            response,
+            response
         });
     }
 
@@ -47,7 +47,7 @@ export default class Status {
         return {
             ...payload,
             success: !payload.error,
-            translatedError: payload.error ? t(lang, payload.error) : undefined,
+            translatedError: payload.error ? t(lang, payload.error) : undefined
         };
     }
 }

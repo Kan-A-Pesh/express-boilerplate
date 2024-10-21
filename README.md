@@ -4,12 +4,13 @@ This is a boilerplate for an ExpressJS server with a few basic features.
 
 ## Features
 
-- 📜 Custom File & Console logging
-- 📦 Environment variables
-- 📝 Body parsing
-- 🚀 Structured responses
-- 🛑 Error handling
-- 🐳 Docker managed
+-   📜 Custom File & Console logging
+-   📦 Environment variables
+-   📝 Body parsing
+-   🚀 Structured responses
+-   🛑 Error handling
+-   🐳 Docker managed
+-   🧼 Prettier & ESLint config
 
 ## Getting started
 

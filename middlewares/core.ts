@@ -10,8 +10,8 @@ export default function middlewareCore(err: Payload | Error, req: Request, res: 
             sentAt: Date.now(),
             response: Status.generatePayload(req.lang, {
                 status: 500,
-                error: "errors.internal",
-            }),
+                error: "errors.internal"
+            })
         });
     }
 
@@ -19,6 +19,6 @@ export default function middlewareCore(err: Payload | Error, req: Request, res: 
     return res.status(payload.masterStatus === 204 ? 200 : payload.masterStatus).json({
         masterStatus: payload.masterStatus,
         sentAt: Date.now(),
-        response: payload.response,
+        response: payload.response
     });
 }

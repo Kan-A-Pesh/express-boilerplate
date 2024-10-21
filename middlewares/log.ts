@@ -8,11 +8,13 @@ export function logIncoming(req: Request, res: Response, next: NextFunction) {
     req.uuid = randomUUID;
     req.receivedAt = receivedAt;
 
-    Logger.writeRaw(`${Logger.prefix()} [REQ] (<--) ${req.uuid} ${req.method} ${req.url} | ${req.ip} ${req.headers["user-agent"]}`);
+    Logger.writeRaw(
+        `${Logger.prefix()} [REQ] (<--) ${req.uuid} ${req.method} ${req.url} | ${req.ip} ${req.headers["user-agent"]}`
+    );
     next();
 }
 
-export function logOutgoing(err: any, req: Request, res: Response, next: NextFunction) {
+export function logOutgoing(err: unknown, req: Request, res: Response, next: NextFunction) {
     const responseTime = Date.now() - req.receivedAt;
     Logger.writeRaw(`${Logger.prefix()} [RES] (-->) ${req.uuid} ${res.statusCode} (${responseTime}ms)`);
     next();
