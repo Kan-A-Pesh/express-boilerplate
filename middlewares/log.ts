@@ -17,5 +17,5 @@ export function logIncoming(req: Request, res: Response, next: NextFunction) {
 export function logOutgoing(err: unknown, req: Request, res: Response, next: NextFunction) {
     const responseTime = Date.now() - req.receivedAt;
     Logger.writeRaw(`${Logger.prefix()} [RES] (-->) ${req.uuid} ${res.statusCode} (${responseTime}ms)`);
-    next();
+    next(err);
 }

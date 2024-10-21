@@ -3,6 +3,7 @@ import langs from "./langs";
 
 export default function t(lang: string, key: string, replacements?: Record<string, string>): string {
     const keys = key.split(".");
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const language = (langs as any)[lang];
 
     let translation = keys.reduce((acc, key) => {
