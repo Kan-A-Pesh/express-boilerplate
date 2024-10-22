@@ -1,5 +1,5 @@
 services:
-  web:
+  test:
     build:
       context: .
       target: test
