@@ -5,28 +5,29 @@ import cookieParser from "cookie-parser";
 import middlewareI18n from "./middlewares/i18n";
 import Logger from "./log/logger";
 import routes from "./routes";
+import Status from "./models/status";
 import { logIncoming, logOutgoing } from "./middlewares/log";
 import middlewareCore from "./middlewares/core";
 
-loadEnv();
-Logger.init();
+export default (logSuffix?: string) => {
+    loadEnv();
+    Logger.init(logSuffix);
 
-const app = express();
+    const app = express();
 
-app.set("trust proxy", globals.env.TRUST_PROXY ? 1 : 0);
+    app.set("trust proxy", globals.env.TRUST_PROXY ? 1 : 0);
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
+    app.use(express.json());
+    app.use(express.urlencoded({ extended: true }));
+    app.use(cookieParser());
 
-app.use(middlewareI18n);
+    app.use(middlewareI18n);
 
-app.use(logIncoming);
-app.use(routes);
-app.use(logOutgoing);
+    app.use(logIncoming);
+    app.use(routes);
+    app.all("*", (req, res, next) => Status.send(req, next, { status: 404, error: "system.notFound" }));
+    app.use(logOutgoing);
+    app.use(middlewareCore);
 
-app.use(middlewareCore);
-
-app.listen(globals.env.PORT, () => {
-    Logger.info(`app.ts::[root] | Server is running on port ${globals.env.PORT}`);
-});
+    return app;
+};

@@ -4,8 +4,11 @@ node_modules/
 # Environment Variables
 .env*.local
 
-# Logs
-logs/
-
 # Build
 dist/
+
+# Tests
+npm-debug.log
+.coverage
+.coverage.*
+coverage/

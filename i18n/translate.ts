@@ -6,21 +6,23 @@ export default function t(lang: string, key: string, replacements?: Record<strin
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const language = (langs as any)[lang];
 
-    let translation = keys.reduce((acc, key) => {
-        return acc[key];
-    }, language);
+    try {
+        let translation = keys.reduce((acc, key) => {
+            return acc[key];
+        }, language);
 
-    if (!translation) {
+        if (!translation) throw new Error();
+
+        // Apply placeholders
+        if (replacements) {
+            Object.entries(replacements).forEach(([key, value]) => {
+                translation = translation.replace(`{${key}}`, value);
+            });
+        }
+
+        return translation;
+    } catch {
         Logger.warn(`translate.ts::t | Translation for key ${key} not found in language ${lang}`);
         return key;
     }
-
-    // Apply placeholders
-    if (replacements) {
-        Object.entries(replacements).forEach(([key, value]) => {
-            translation = translation.replace(`{${key}}`, value);
-        });
-    }
-
-    return translation;
 }

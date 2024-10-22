@@ -1,0 +1,8 @@
+services:
+  test:
+    build:
+      context: .
+      target: test
+    volumes:
+      - ./coverage/cov:/data/app/coverage
+      - ./coverage/logs:/data/app/logs

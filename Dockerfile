@@ -13,7 +13,24 @@ RUN npm install --include=dev
 USER node
 WORKDIR /data/app
 
-CMD ["npx", "ts-node-dev", "-r", "tsconfig-paths/register", "app.ts"]
+CMD ["npx", "ts-node-dev", "-r", "tsconfig-paths/register", "--files", "entry.ts"]
+
+FROM base AS test
+
+ENV NODE_ENV=test
+RUN npm install --include=dev
+
+USER node
+WORKDIR /data/app
+
+COPY . /data/app
+RUN npx tsc
+
+ENV LOG_FOLDER=./logs
+
+# Cleanup and test
+ENTRYPOINT ["docker/entrypoint-test.sh"]
+
 
 # Production stage
 # Build the app
@@ -24,7 +41,7 @@ RUN npm install
 COPY . /data/app
 WORKDIR /data/app
 
-RUN npx tsc
+RUN npx tsc --project tsconfig.prod.json
 
 # Create the server image
 FROM node:20-alpine AS production
