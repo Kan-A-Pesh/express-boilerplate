@@ -1,5 +1,5 @@
-import t from "i18n/translate";
-import Logger from "log/logger";
+import t from "@/i18n/translate";
+import Logger from "@/log/logger";
 import type { NextFunction, Request } from "express";
 
 export interface StatusPayload {
