@@ -12,6 +12,9 @@ services:
         required: true
     volumes:
       - ./logs:/logs
+    depends_on:
+      - postgres
+
   postgres:
     image: postgres:17-alpine
     env_file:

@@ -5,10 +5,12 @@
     "scripts": {
         "dev": "./scripts/dev.sh",
         "build": "./scripts/build.sh",
-        "test": "./scripts/test.sh",
+        "test": "./scripts/test.sh --open-coverage",
+        "test:ci": "./scripts/test.sh",
         "format": "prettier --write .",
         "lint": "eslint .",
-        "clear": "rm -rf dist node_modules coverage logs/*.log"
+        "clear": "rm -rf dist node_modules coverage logs/*.log",
+        "db:migrate": "drizzle-kit generate"
     },
     "author": {
         "email": "not.kanapesh@gmail.com",
@@ -19,6 +21,7 @@
     "dependencies": {
         "cookie-parser": "^1.4.6",
         "dotenv": "^16.4.5",
+        "drizzle-orm": "^0.35.3",
         "express": "^4.19.2",
         "pg": "^8.13.0",
         "reflect-metadata": "^0.2.2",
@@ -31,9 +34,11 @@
         "@types/express": "^4.17.21",
         "@types/jest": "^29.5.13",
         "@types/node": "^22.7.8",
+        "@types/pg": "^8.11.10",
         "@types/supertest": "^6.0.2",
         "@typescript-eslint/eslint-plugin": "^8.11.0",
         "@typescript-eslint/parser": "^8.11.0",
+        "drizzle-kit": "^0.26.2",
         "eslint": "^9.13.0",
         "eslint-config-prettier": "^9.1.0",
         "eslint-plugin-prettier": "^5.2.1",
