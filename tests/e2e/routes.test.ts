@@ -1,10 +1,10 @@
 import request from "supertest";
 import createApp from "@/app";
 
-const app = createApp("unit-index");
+const app = createApp("e2e-routes");
 
 describe("Test multiple routes", () => {
-    it("should send an empty response on GET /", async () => {
+    test("should send an empty response on GET /", async () => {
         const res = await request(app).get("/").expect("Content-Type", /json/).expect(200);
 
         expect(res.body).toStrictEqual({
@@ -19,7 +19,7 @@ describe("Test multiple routes", () => {
         });
     });
 
-    it("should send an empty response GET /error", async () => {
+    test("should send an empty response GET /error", async () => {
         const res = await request(app)
             .get("/error")
             .set("Accept-Language", "en")

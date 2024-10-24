@@ -13,7 +13,8 @@ const config: JestConfigWithTsJest = {
     moduleFileExtensions: ["ts", "js", "json", "node"],
     moduleNameMapper: {
         "^@/(.*)$": "<rootDir>/$1"
-    }
+    },
+    globalSetup: "<rootDir>/tests/setup.ts"
 };
 
 export default config;
