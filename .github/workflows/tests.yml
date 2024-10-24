@@ -11,6 +11,10 @@ on:
 jobs:
     test:
         runs-on: ubuntu-latest
+        container:
+            image: node:20
+            options: --user root
+        name: Run tests
         steps:
             - uses: actions/checkout@v3
 
