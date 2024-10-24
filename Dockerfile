@@ -27,6 +27,7 @@ COPY . /data/app
 RUN npx tsc
 
 ENV LOG_FOLDER=./logs
+RUN mkdir -p $LOG_FOLDER && chown -R node $LOG_FOLDER
 
 # Cleanup and test
 ENTRYPOINT ["docker/entrypoint-test.sh"]
