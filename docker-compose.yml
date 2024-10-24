@@ -4,7 +4,7 @@ services:
       context: .
       target: production
     ports:
-      - "3000:3000"
+      - "0.0.0.0:3000:3000"
     env_file:
       - path: .env
         required: true
@@ -24,3 +24,6 @@ services:
         required: true
     volumes:
       - postgres:/var/lib/postgresql/data
+
+volumes:
+  postgres:

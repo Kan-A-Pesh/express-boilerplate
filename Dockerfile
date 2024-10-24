@@ -41,7 +41,7 @@ RUN npm install
 COPY . /data/app
 WORKDIR /data/app
 
-RUN npx tsc --project tsconfig.prod.json
+RUN npx tspc --project tsconfig.prod.json
 
 # Create the server image
 FROM node:20-alpine AS production
@@ -49,6 +49,7 @@ ENV NODE_ENV=production
 
 COPY --from=build /data/app/dist /build/dist
 COPY --from=build /data/package.json /data/package-lock.json /build/
+COPY --from=build /data/app/database/migrations /build/database/migrations
 
 WORKDIR /build
 RUN npm install --only=production
@@ -58,5 +59,5 @@ RUN mkdir -p $LOG_FOLDER && chown -R node $LOG_FOLDER
 
 USER node
 
-ENTRYPOINT ["node", "/build/dist/app.js"]
+ENTRYPOINT ["node", "/build/dist/entry.js"]
 
