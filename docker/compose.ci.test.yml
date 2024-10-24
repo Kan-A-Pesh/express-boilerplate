@@ -1,14 +1,8 @@
 services:
   test:
     build:
-      context: .
+      context: ..
       target: test
-    volumes:
-      - ./coverage/cov:/data/app/coverage
-      - ./coverage/logs:/data/app/logs
-    env_file:
-      - path: .env.test.local
-        required: false
     environment:
       NODE_ENV: test
       POSTGRES_DB: postgres
@@ -25,6 +19,3 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_HOST: postgres
-
-volumes:
-  postgres:

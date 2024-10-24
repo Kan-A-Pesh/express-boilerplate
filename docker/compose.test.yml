@@ -1,20 +1,20 @@
 services:
-  web:
+  test:
     build:
-      context: .
-      target: development
-    ports:
-      - "0.0.0.0:3000:3000"
+      context: ..
+      target: test
     volumes:
-      - .:/data/app
+      - ../coverage/cov:/data/app/coverage
+      - ../coverage/logs:/data/app/logs
+    env_file:
+      - path: ../.env.test.local
+        required: false
     environment:
-      NODE_ENV: development
+      NODE_ENV: test
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_HOST: postgres
-    stdin_open: true
-    tty: true
     depends_on:
       - postgres
 
@@ -25,8 +25,3 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_HOST: postgres
-    ports:
-      - "0.0.0.0:3030:5432" # Use port 3030 for external debugging
-    # # Uncomment the next line to have a persistent volume for the database
-    # volumes:
-    #     - postgres:/var/lib/postgresql/data

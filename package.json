@@ -5,7 +5,7 @@
     "scripts": {
         "dev": "./scripts/dev.sh",
         "build": "./scripts/build.sh",
-        "start": "docker compose -f docker-compose.yml up --build -d --force-recreate --remove-orphans",
+        "start": "docker compose -f docker/compose.yml up --build -d --force-recreate --remove-orphans",
         "test": "./scripts/test.sh --open-coverage",
         "ci:test": "./scripts/test.sh",
         "format": "prettier --write .",
