@@ -1,0 +1,36 @@
+{
+    "Creates a router": {
+        "isFileTemplate": true,
+        "description": "Creates a router",
+        "prefix": "router",
+        "scope": "typescript",
+        "body": [
+            "import { Router } from \"express\";",
+            "",
+            "const router = Router();",
+            "",
+            "$0",
+            "",
+            "export default router;"
+        ]
+    },
+    "Creates a route": {
+        "isFileTemplate": true,
+        "description": "Creates a route",
+        "prefix": "route",
+        "scope": "typescript",
+        "body": [
+            "import Status from \"@/models/status\";",
+            "import { NextFunction, Request, Response } from \"express\";",
+            "",
+            "export default function route_${1:TM_DIRECTORY}_${2:TM_FILENAME_BASE}(req: Request, res: Response, next: NextFunction) {",
+            "",
+            "    $0",
+            "",
+            "    return Status.send(req, next, {",
+            "        status: 204",
+            "    });",
+            "}"
+        ]
+    }
+}
