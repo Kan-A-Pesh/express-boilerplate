@@ -7,7 +7,7 @@
         "body": [
             "import { Router } from \"express\";",
             "",
-            "const router = Router();",
+            "const ${1:${TM_DIRECTORY/^.+[\\/\\\\]+(.*)$/$1/}}Router = Router();",
             "",
             "$0",
             "",
@@ -23,7 +23,7 @@
             "import Status from \"@/models/status\";",
             "import { NextFunction, Request, Response } from \"express\";",
             "",
-            "export default function route_${1:TM_DIRECTORY}_${2:TM_FILENAME_BASE}(req: Request, res: Response, next: NextFunction) {",
+            "export default function route_${1:${TM_DIRECTORY/^.+[\\/\\\\]+(.*)$/$1/}}_${2:$TM_FILENAME_BASE}(req: Request, res: Response, next: NextFunction) {",
             "",
             "    $0",
             "",
