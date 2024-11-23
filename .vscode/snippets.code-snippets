@@ -11,7 +11,7 @@
             "",
             "$0",
             "",
-            "export default router;"
+            "export default ${1:${TM_DIRECTORY/^.+[\\/\\\\]+(.*)$/$1/}}Router;"
         ]
     },
     "Creates a route": {
