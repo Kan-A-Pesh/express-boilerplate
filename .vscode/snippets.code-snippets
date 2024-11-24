@@ -23,7 +23,7 @@
             "import Status from \"@/models/status\";",
             "import { NextFunction, Request, Response } from \"express\";",
             "",
-            "export default function route_${1:${TM_DIRECTORY/^.+[\\/\\\\]+(.*)$/$1/}}_${2:$TM_FILENAME_BASE}(req: Request, res: Response, next: NextFunction) {",
+            "export default async function route_${1:${TM_DIRECTORY/^.+[\\/\\\\]+(.*)$/$1/}}_${2:$TM_FILENAME_BASE}(req: Request, res: Response, next: NextFunction) {",
             "",
             "    $0",
             "",
